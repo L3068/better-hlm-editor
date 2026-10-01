@@ -18,7 +18,7 @@ func _init(_tile_id, _tile_x, _tile_y, _depth, _submode=0):
 	z_index = -depth
 	for tile in ObjectsLoader.tiles:
 		if tile["id"] == tile_id:
-			texture = tile["tiles"][str(tile_x) + " " + str(tile_y)]
+			texture = tile["tiles"].get(TileCoordinates.key(tile_x, tile_y))
 			break
 	if texture == null:
 		queue_free()

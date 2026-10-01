@@ -1,6 +1,50 @@
 # BETTER HLM2 EDITOR
 Program to create custom levels for Hotline Miami 2: Wrong number
 
+## Running from source on Linux
+
+Tested with Godot 4.7 Stable (`4.7.stable.official.5b4e0cb0f`) on Linux x86_64.
+Open `project.godot` in that version of Godot and run the project, or launch it
+from the repository root:
+
+```bash
+godot --path .
+```
+
+The editor requires a compatible, legally obtained local `base.wad` beside
+`project.godot`. Do not add game data to contributions. `version.txt` is optional:
+source checkouts without it skip the release updater.
+
+Custom data uses the system Documents directory followed by
+`My Games/Better HLM Editor`. The game mod lookup uses
+`My Games/HotlineMiami2/mods` under that same Documents directory. Proton paths
+are not discovered automatically.
+
+### Verification
+
+Run these commands with the tested Godot binary from the repository root:
+
+```bash
+godot --version
+godot --headless --editor --path . --quit
+godot --headless --path tests --script res://TestRunner.gd
+godot --headless --path tests --script res://TestRunner.gd -- --intentional-failure
+godot --headless --path . --quit-after 2
+godot --headless --path . res://TestsIntegration/ui_regression_probe.tscn
+```
+
+The unit suite does not need game data. The intentional-failure command must
+exit with status 1; normal tests must exit with status 0. The application and UI
+probe require the local WAD. The probe creates and removes a synthetic cover in
+`user://`, loads the bundled default level, and checks missing covers, stale
+previews, missing sprite frames, sprite filtering, and selection without saving
+any level. Run it with a disposable user-data directory.
+
+These checks cover source startup and targeted editor regressions. Interactive
+editing, Windows startup, exported-level compatibility in Hotline Miami 2, and
+game/Proton playtest automation still require manual testing. Bounded headless
+application runs currently report resource leaks at shutdown.
+
 ## CONTROLS:
  - MMB - move camera
  - Scroll wheel - zoom
