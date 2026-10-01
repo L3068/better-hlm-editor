@@ -38,6 +38,10 @@ editing, Windows startup, exported-level compatibility in Hotline Miami 2, and
 game/Proton playtest automation still require manual testing. Bounded headless
 application runs currently report resource leaks at shutdown.
 
+Tiles with a known sheet ID but unavailable atlas coordinates show a placeholder.
+The diagnostics panel identifies the floor, tile ID, and atlas coordinates;
+the tooltip lists all affected tiles. Saving preserves the original tile fields.
+
 ## CONTROLS:
  - MMB - move camera
  - Scroll wheel - zoom
